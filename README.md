@@ -10,9 +10,9 @@ Github Open Issues
   4) The number of open issues earlier than 7 days is by subtracting the total_count with the sum of the above two.
 
 #### Tasks ####  
-  [x] Successfully checks whether the url entered is correct and is from github.
-  [x] Fails if the Url is not correct, giving either the error saying the url is incorrect or might give an error saying can't read the json as the Url is incorrect.
-  [x] On successfully run will fetch the counts and display the same.
+  - [x] Successfully checks whether the url entered is correct and is from github.
+  - [x] Fails if the Url is not correct, giving either the error saying the url is incorrect or might give an error saying can't read the json as the Url is incorrect.
+  - [x] On successfully run will fetch the counts and display the same.
 
 
 The Url to access the page: http://atandon-001-site1.dtempurl.com/
