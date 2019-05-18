@@ -1,0 +1,57 @@
+﻿
+@{
+	ViewBag.Title = "Index";
+}
+
+<h1>
+	Git Issues
+</h1>
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+<div class="form-group">
+	<label for="usr">Repo Url:</label>
+	<input type="text" class="form-control" name="url" id="url" placeholder="https://github.com/facebook/react/"/>
+
+	<input type="submit" class="btn btn-primary" value="Stats" />
+</div>
+}
+
+<br />
+
+@model Task.Models.ResponseStructure
+@if (Model.m_statusStructure.m_statusCode == 200)
+{
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th> Total Number of Open Issues </th>
+				<th> Total Number of Open Issues In Last 24 Hours</th>
+				<th> Total Number of Open Issues In 24 Hours - 7 Day </th>
+				<th> Total Number of Open Issues Older Than 7 Day </th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					@Model.m_openIssuesCountTotal
+				</td>
+
+				<td>
+					@Model.m_opeIssuesCountIn24Hrs
+				</td>
+
+				<td>
+					@Model.m_openIssuesCountInLast24HrsTo7Days
+				</td>
+
+				<td>
+					@Model.m_openIssuesCountOlderThan7Days
+				</td>
+			</tr>
+		</tbody>
+	</table>
+}
+else
+{
+	<div class="alert alert-danger"> @Model.m_statusStructure.m_statusMessage </div>
+}
