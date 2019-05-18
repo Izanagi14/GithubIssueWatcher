@@ -69,10 +69,11 @@ namespace Task.Models
 			m_opeIssuesCountIn24Hrs = IssueCountUrl(m_last24HrsCountUrl);
 
 			//more than 24hrs less than 7 days
-			timeE = timeE.AddDays(-7);
+			timeE = DateTime.Now;
+			timeE = timeE.AddHours(-168);
 			time = timeE.ToString("yyyy-MM-ddTHH:mm:ss") + "Z";
 			m_24To7DaysCountUrl = m_baseUrl + apiUrl + "issues?since=" + time + "&state=open";
-			m_openIssuesCountInLast24HrsTo7Days = IssueCountUrl(m_24To7DaysCountUrl);
+			m_openIssuesCountInLast24HrsTo7Days = IssueCountUrl(m_24To7DaysCountUrl) - m_opeIssuesCountIn24Hrs;
 
 
 			m_openIssuesCountOlderThan7Days = m_openIssuesCountTotal - (m_opeIssuesCountIn24Hrs + m_openIssuesCountInLast24HrsTo7Days);
