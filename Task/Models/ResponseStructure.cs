@@ -23,8 +23,9 @@ namespace Task.Models
 		//A status Structure for the model to be accessed as the time of displaying
 		public StatusStructure m_statusStructure { get; set; }
 		private string m_baseUrl = "https://api.github.com/repos/";
+		private string m_searchApiUrl = "https://api.github.com/search/issues?q=repo:{0}+is:issue+is:open";
 
-		public string m_repoName;
+		public string m_repoName = null;
 		/*
 		 * Url string for the request to be sent to api to get the response
 		 */
@@ -56,7 +57,7 @@ namespace Task.Models
 			m_statusStructure = statusStructure;
 			m_repoName = apiUrl;
 			//Total Open Issues
-			m_openIssueCountUrl = m_baseUrl + apiUrl;
+			m_openIssueCountUrl = String.Format(m_searchApiUrl, apiUrl.TrimEnd('/'));
 			TotalOpenIssues();
 
 			//Last 24Hrs Issues
@@ -84,9 +85,9 @@ namespace Task.Models
 		private void TotalOpenIssues()
 		{
 			StatusStructure statusStructure = m_statusStructure;
-			JObject jsonResponse = GetReponseAsync(m_openIssueCountUrl,ref statusStructure);
-			if (jsonResponse["open_issues_count"] != null)
-				m_openIssuesCountTotal = long.Parse(jsonResponse["open_issues_count"].ToString());
+			JObject jsonResponse = GetReponseAsync(m_openIssueCountUrl, ref statusStructure);
+			if (jsonResponse["total_count"] != null)
+				m_openIssuesCountTotal = long.Parse(jsonResponse["total_count"].ToString());
 			else
 				m_openIssuesCountTotal = 0;
 		}
